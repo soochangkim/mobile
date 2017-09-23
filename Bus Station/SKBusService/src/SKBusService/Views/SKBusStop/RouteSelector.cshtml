@@ -1,0 +1,50 @@
+@model IEnumerable<SKBusService.Models.RouteStop>
+
+@{
+    ViewData["Title"] = "Routes using Stop " + TempData["number"].ToString() + "-" + TempData["location"];
+}
+<h2>@ViewData["Title"]</h2>
+
+<form asp-controller="SKRouteSchedule" asp-action="RouteStopSchedule" method="post">
+    <table class="table col-md-6">
+        <thead>
+            <tr>
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.BusRouteCode)
+                </th>
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.BusRouteCodeNavigation.RouteName)
+                </th>
+                <th class="col-md-2"></th>
+                <th class="col-md-6"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BusRouteCode)
+                    </td>
+                    <td>
+                        <label for="@item.RouteStopId">@Html.DisplayFor(modelItem => item.BusRouteCodeNavigation.RouteName)</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="routeStopId" id="@item.RouteStopId" value="@item.RouteStopId" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-9">
+            <input type="submit" value="Submit" class="btn btn-default"/>
+        </div>
+    </div>
+
+
+</form>
+<a asp-controller="SKBusStop" asp-action="Index">Go back to previous page</a>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

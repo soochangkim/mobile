@@ -1,0 +1,115 @@
+@model IEnumerable<SKBusService.Models.BusStop>
+
+@{
+    ViewData["Title"] = "Bus Stop Listing";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-orderBy="number">@Html.DisplayNameFor(model => model.BusStopNumber)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoingDowntown)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-orderBy="location">@Html.DisplayNameFor(model => model.Location)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationHash)
+            </th>
+            <th>
+                <form>
+                    <select name="number">
+                        <option value="10">10</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    <input type="submit" value="Pages"/>
+                </form>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="RouteSelector" asp-route-busStopNumber="@item.BusStopNumber">@Html.DisplayFor(modelItem => item.BusStopNumber)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoingDowntown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationHash)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BusStopNumber">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BusStopNumber">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BusStopNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<ul style="list-style:none">
+    @if(int.Parse(ViewData["total"].ToString()) > 5)
+    {
+        int total = int.Parse(ViewData["total"].ToString());
+        int page = int.Parse(ViewData["page"].ToString());
+        int last = -1;
+        <li style="float:left" class="page_nav"><a asp-action="Index" asp-route-page="0"><<</a></li>
+        
+        for (int i = 0; i < 5; i++)
+        {
+            int tempPage = 0;
+            if (page < 2 && page >= 0)
+            {
+                tempPage = i;
+            }
+            else if (total < page + 2 || page == -1)
+            {
+                tempPage = total - 4 + i;
+            }
+            else
+            {
+                tempPage = page - 2 + i;
+            }
+
+            if (tempPage == page)
+            {
+                <li style="float:left" class="page_nav"><p> @(tempPage + 1) </p></li>
+        }
+        else
+        {
+                <li style="float:left" class="page_nav"><a asp-action="Index" asp-route-page="@tempPage">@(tempPage + 1)</a></li>
+            }
+        }
+
+
+        <li style="float:left"><a asp-action="Index" asp-route-page="@last">>></a></li>
+    }
+    else
+    {
+        for (int i = 0; i < int.Parse(ViewData["total"].ToString()); i++)
+        {
+            if (i == int.Parse(ViewData["page"].ToString()))
+            {
+                <li style="float:left" class="page_nav"><p>@(i +1) </p></li>
+            }
+            else
+            {
+                <li style="float:left" class="page_nav"><a asp-action="Index" asp-route-page="@i">@(i + 1)</a></li>
+            }
+        }
+    }
+</ul>

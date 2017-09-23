@@ -1,0 +1,58 @@
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Microsoft.AspNetCore.Http
+
+@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Users In Role Managing Page";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="AddNewUser">
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label for="userId" class="control-label col-md-2">Other users: </label>
+                <div class="col-md-4">
+                    <select name="userId" class="form-control" asp-items="ViewBag.otherUsers"></select>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <input type="submit" value="Add" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            @if (Context.Session.GetString("id") != "1" || User.Identity.Name != item.UserName)
+            {
+            <td>
+                <a asp-action="RemoveRoleFromUser" asp-route-userId="@item.Id">Remove</a>
+            </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>

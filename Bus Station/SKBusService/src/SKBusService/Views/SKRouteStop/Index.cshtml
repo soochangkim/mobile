@@ -1,0 +1,50 @@
+@model IEnumerable<SKBusService.Models.RouteStop>
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Stops for " + Context.Session.GetString("busRouteCode") + "-" + Context.Session.GetString("routeName");
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<p>
+    <a asp-action="Create"  asp-route-busRouteCode="@ViewData["busRouteCode"]" asp-route-routeName="@ViewData["routeName"]">Add stop to route</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BusStopNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusStopNumberNavigation.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OffsetMinutes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusStopNumber)
+            </td>
+            <td>
+                <a asp-action="RouteStopSchedule" asp-controller="SKRouteSchedule" asp-route-routeStopId="@item.RouteStopId">@Html.DisplayFor(model => item.BusStopNumberNavigation.Location)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OffsetMinutes)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RouteStopId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RouteStopId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RouteStopId">Remove</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

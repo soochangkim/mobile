@@ -1,0 +1,60 @@
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "Role maintenance";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+    <form asp-action="CreateNewRole">
+        <div class="form-horizontal">
+            <h4>Role</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label for="roleName" class="col-md-2 control-label">Role Name: </label>
+                <div class="col-md-4">
+                    <input name="roleName" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="UsersInRole" asp-route-id="@item.Id">Manage Users In Role</a> 
+                @if(item.Name != "administrators")
+                {
+                    @:|
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

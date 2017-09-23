@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SKBusService.Models.RouteSchedule>
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Stop: " + Context.Session.GetString("BusStopNumber") + " - " + Context.Session.GetString("Location");
+    ViewData["SubTitle"] = "Route: " + Context.Session.GetString("busRouteCode") + " - " + Context.Session.GetString("routeName");
+}
+
+<h2>@ViewData["Title"]</h2>
+<h4>@ViewData["SubTitle"]</h4>
+
+<h4>Mon-Fri</h4>
+<ul>
+    @foreach (var item in Model)
+    {
+
+        if (item.IsWeekDay == true)
+        {
+            <li>@item.StartTime</li>
+        }
+
+    }
+</ul>
+
+<h4>Sat-Sun & Holidays</h4>
+<ul>
+    @foreach (var item in Model)
+    {
+
+        if (item.IsWeekDay != true)
+        {
+            <li>@item.StartTime</li>
+        }
+
+    }
+</ul>

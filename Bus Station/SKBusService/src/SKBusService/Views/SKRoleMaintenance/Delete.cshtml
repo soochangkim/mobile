@@ -1,0 +1,48 @@
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Microsoft.AspNetCore.Http
+@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "Delte role";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    This user role will be deleted
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="Delete" asp-route-roleId="@Context.Session.GetString("id")">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete All" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+

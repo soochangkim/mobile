@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using SKBusService.Models.DB
+
+@model IEnumerable<AspNetUsers>
+
+@{
+    ViewData["title"] = "User Maintenance";
+}
+
+<h2>@ViewData["title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>Locked Out</th>
+            <th>Authenticated</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td>@(item.LockoutEnd == null ? "No" : "Yes") </td>
+
+                <td>@(item.PasswordHash == null || @item.PasswordHash == "" ? "Yes" : "No") </td>
+                <td>
+                    <a asp-action="ChangeLockState" asp-route-id="@item.Id">@(item.LockoutEnd > DateTime.Now ? "Unlock" : "Lock") User</a>
+                @if (User.IsInRole("administrators"))
+                {
+                    @:| 
+                    <a asp-action="ResetPassword" asp-route-id="@item.Id">Reset Password</a>
+                }   
+
+                @{
+                    var authorized = false;
+                    foreach (var role in item.AspNetUserRoles)
+                    {
+                        if (role.RoleId == "1")
+                        {
+                            authorized = true;
+                        }
+                    }
+                    if (!authorized)
+                    {
+                        @:|
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                }
+                 </td>
+            </tr>
+        }
+    </tbody>
+</table>

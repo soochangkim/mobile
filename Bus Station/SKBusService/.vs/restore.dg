@@ -1,0 +1,7 @@
+#:G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\src\SKClassLibrary\SKClassLibrary.xproj
+#:G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\src\SKBusService\SKBusService.xproj
+G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\src\SKBusService\SKBusService.xproj|G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\src\SKClassLibrary\SKClassLibrary.xproj
+#:G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\test\xUnit.Tests\xUnit.Tests.xproj
+G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\test\xUnit.Tests\xUnit.Tests.xproj|G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\src\SKBusService\SKBusService.xproj
+G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\test\xUnit.Tests\xUnit.Tests.xproj|G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\src\SKClassLibrary\SKClassLibrary.xproj
+G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\src\SKBusService\SKBusService.xproj|G:\ASP.NET Core\Assignments\Assignment05\temp\SKBusService\src\SKClassLibrary\SKClassLibrary.xproj

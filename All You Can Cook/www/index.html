@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Include jQuery -->
+    <script src="js/lib/jquery-2.1.4.js"></script>
+    <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+    <script src="js/lib/jquery.validate.js"></script>
+
+    <!-- Custom javascript files will come here -->
+    <script src="js/util.js" type="text/javascript"></script>
+    <script src="js/database.js" type="text/javascript"></script>
+    <script src="js/DAL.js" type="text/javascript"></script>
+    <script src="js/facade.js" type="text/javascript"></script>
+    <script src="js/validation.js" type="text/javascript"></script>
+    <script src="js/geolocation.js" type="text/javascript"></script>
+    <script src="js/camera.js" type="text/javascript"></script>
+    <script src="js/global.js" type="text/javascript"></script>
+
+    <!-- jQuery css files -->
+    <link rel="stylesheet" href="css/lib/jquery.mobile-1.4.5.css"/>
+
+    <!-- Custom css files-->
+    <link rel="stylesheet" href="css/myStyle.css"/>
+    <script src="cordova.js" type="text/javascript"></script>
+</head>
+<body>
+
+<!-- Main page -->
+
+<div data-role="page" id="pgMain">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h2>All You Can Cook</h2>
+        <div data-role="navbar">
+            <ul>
+                <li><a data-theme="a" href="#pgMain" data-icon="home" class="ui-btn-active ui-state-persist">Main
+                    Page</a></li>
+                <li><a data-theme="a" href="#pgShowRecipes" data-icon="heart">Recipes</a></li>
+                <li><a data-theme="a" href="#pgShoppingList" data-icon="shop">Shopping List</a></li>
+                <li><a data-theme="a" href="#pgAbout" data-icon="user">About Us</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <h1>All You Can Cook</h1>
+        <h3>Therefore, All You can Eat !!</h3>
+        <img src="img/MainImage.jpg" alt="Banner" width="100%">
+        <p>This Application is basically a platform for those who want to post their own recipes and also want to check other’s recipes at the same place. It also provides a personal shopping list where user can write shopping items </p>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h2>&copy;Almas Khan, Soochang Kim, 2017</h2>
+    </footer>
+</div>
+
+<!-- Recipe page to display all resigtered recipes -->
+
+<div data-role="page" id="pgShowRecipes">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h2>All You Can Cook</h2>
+        <div data-role="navbar">
+            <ul>
+                <li><a data-theme="a" href="#pgMain" data-icon="home">Main Page</a></li>
+                <li><a data-theme="a" href="#pgShowRecipes" data-icon="heart" class="ui-btn-active ui-state-persist">Recipes</a>
+                </li>
+                <li><a data-theme="a" href="#pgShoppingList" data-icon="shop">Shopping List</a></li>
+                <li><a data-theme="a" href="#pgAbout" data-icon="user">About Us</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <ul id="lstRecipe" data-role="listview" data-inset="true">
+        </ul>
+        <button type="button" data-role="button" id="btnRecipePost" name="btnRecipePost">Post</button>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h2>&copy;Almas Khan, Soochang Kim, 2017</h2>
+    </footer>
+</div>
+
+<!-- Recipe detail page -->
+
+<div data-role="page" id="pgRecipeDetail">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h2 id="titleRecipeDetail">Details</h2>
+        <div data-role="navbar">
+            <ul>
+                <li><a data-theme="a" href="#pgMain" data-icon="home">Main Page</a></li>
+                <li><a data-theme="a" href="#pgShowRecipes" data-icon="heart" class="ui-btn-active ui-state-persist">Recipes</a>
+                </li>
+                <li><a data-theme="a" href="#pgShoppingList" data-icon="shop">Shopping List</a></li>
+                <li><a data-theme="a" href="#pgAbout" data-icon="user">About Us</a></li>
+
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <img src="" id="imgRecipe" width="100%"/>
+        <div id="ingredient">
+        </div>
+        <div id="instruction">
+        </div>
+        <!-- Recipe details will come dynamically-->
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h2>&copy;Almas Khan, Soochang Kim, 2017</h2>
+    </footer>
+</div>
+
+<!-- Post recipe page  -->
+
+<div data-role="page" id="pgPostRecipe">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h2>Post your own recipe</h2>
+        <div data-role="navbar">
+            <ul>
+                <li><a data-theme="a" href="#pgMain" data-icon="home">Main Page</a></li>
+                <li><a data-theme="a" href="#pgShowRecipes" data-icon="heart" class="ui-btn-active ui-state-persist">Recipes</a>
+                </li>
+                <li><a data-theme="a" href="#pgShoppingList" data-icon="shop">Shopping List</a></li>
+                <li><a data-theme="a" href="#pgAbout" data-icon="user">About Us</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <form id="frmRecipePost" name="frmRecipePost">
+            <p class="error" id="error"></p>
+            <button type="button" data-role="button" id="btnPostImage">Up Load Image</button>
+            <img id="imgPostImage" src="" width="100%" />
+            <input type="hidden" id="txtPostImage" name="txtPostImage"/>
+            <label for="txtTitle">Title</label>
+            <input type="text" name="txtTitle" id="txtTitle"/>
+            <label for="txtCategory">Category</label>
+            <input type="text" name="txtCategory" id="txtCategory"/>
+            <div id="lblIngredients" class="ui-field-contain">
+                <label for="lblIngredients">Ingredients</label><br/><input type="hidden"/><br/>
+                <div>
+                    <label for="txtIngredients">Ingredient</label>
+                    <input type="text" name="txtIngredients" id="txtIngredients"/>
+                    <label for="txtQuantity">Quantity</label>
+                    <input type="text" name="txtQuantity" id="txtQuantity"/>
+                </div>
+            </div>
+            <label for="txtDirection">Direction</label>
+            <textarea name="txtDirection" id="txtDirection"></textarea>
+            <label for="txtWebsite">Website</label>
+            <input type="text" name="txtWebsite" id="txtWebsite"/>
+            <label for="txtName">Name</label>
+            <input type="text" name="txtName" id="txtName"/>
+            <button type="button" data-role="button" id="btnSubmit" name="btnSubmit">Submit</button>
+            <button type="button" data-role="button" id="btnCancel" name="btnCancel">Cancel</button>
+        </form>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h2>&copy;Almas Khan, Soochang Kim, 2017</h2>
+    </footer>
+</div>
+
+<!-- Shopping list page to display shipping list that user add -->
+
+<div data-role="page" id="pgShoppingList">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h2>All You Can Cook</h2>
+        <div data-role="navbar">
+            <ul>
+                <li><a data-theme="a" href="#pgMain" data-icon="home">Main Page</a></li>
+                <li><a data-theme="a" href="#pgShowRecipes" data-icon="heart">Recipes</a></li>
+                <li><a data-theme="a" href="#pgShoppingList" data-icon="shop" class="ui-btn-active ui-state-persist">Shopping
+                    List</a></li>
+                <li><a data-theme="a" href="#pgAbout" data-icon="user">About Us</a></li>
+
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <ul id="shoppingList" data-role="listview" class="ui-listview-inset">
+        </ul>
+
+        <a href="#popupAddItem" data-rel="popup" data-position-to="window"
+           class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a"
+           data-transition="pop">Add</a>
+        <div data-role="popup" id="popupAddItem" data-theme="a" class="ui-corner-all">
+            <form id="addItemForm">
+                <div style="padding:10px 20px;">
+                    <h3>Please enter in item</h3>
+
+                    <input type="text" name="itemName" id="itemName" value="" placeholder="item Name" data-theme="a">
+                    <input type="text" name="quantity" id="quantity" value="" placeholder="quantity" data-theme="a">
+
+                    <button type="submit" id="btnaddItem" name="btnaddItem"
+                            class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Add Item
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <fieldset data-role="controlgroup" data-type="horizontal">
+            <button type="button" id="btnclearItems" name="btnclearItems" style="background-color: black; color:white;">
+                CLEAR
+            </button>
+            <a href="#pgGroceryMap" data-role="button" type="button" id="btnGoShopping" name="btnGoShopping"
+               class="ui-btn-active">GO TO SHOPPING</a>
+        </fieldset>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h2>&copy;Almas Khan, Soochang Kim, 2017</h2>
+    </footer>
+</div>
+
+<div data-role="page" id="pgGroceryMap" data-url="pgGorceryMap">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h2>All You Can Cook</h2>
+        <div data-role="navbar">
+            <ul>
+                <li><a data-theme="a" href="#pgMain" data-icon="home">Main
+                    Page</a></li>
+                <li><a data-theme="a" href="#pgShowRecipes" data-icon="heart">Recipes</a></li>
+                <li><a data-theme="a" href="#pgShoppingList" data-icon="shop" class="ui-btn-active ui-state-persist">Shopping
+                    List</a></li>
+                <li><a data-theme="a" href="#pgAbout" data-icon="user">About Us</a></li>
+
+            </ul>
+        </div>
+    </header>
+    <div role="main" class="ui-content" id="map" style="height:300px; width:300px;">
+        <!-- map loads here... -->
+    </div>
+    <div data-role="content">
+        <ul id="lstGrocery" data-role="listview" data-inset="true">
+        </ul>
+    </div>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h2>&copy;Almas Khan, Soochang Kim, 2017</h2>
+    </footer>
+</div>
+<!--About us page -->
+<div data-role="page" id="pgAbout">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h2>All You Can Cook</h2>
+        <div data-role="navbar">
+            <ul>
+                <li><a data-theme="a" href="#pgMain" data-icon="home">Main Page</a></li>
+                <li><a data-theme="a" href="#pgShowRecipes" data-icon="heart">Recipes</a>
+                </li>
+                <li><a data-theme="a" href="#pgShoppingList" data-icon="shop">Shopping List</a></li>
+                <li><a data-theme="a" href="#pgAbout" data-icon="user" class="ui-btn-active ui-state-persist">About
+                    Us</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <img src="img/1.jpg" alt="OwnerPhoto" width="100%">
+        <h3>Developer's Info</h3>
+        <p>Soochang Kim <br>
+           7227663<br>
+        CPA Level 4</p>
+        <p>Almas Khan <br>
+            7481823<br>
+            CPA Level 4</p>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h2>&copy;Almas Khan, Soochang Kim, 2017</h2>
+    </footer>
+</div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUjlnzgTSmMwf0VC4JXL2O9l5KzPkCaQY&libraries=places"></script>
+
+</body>
+</html>
