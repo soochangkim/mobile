@@ -1,10 +1,7 @@
 # Web Application
 
-
-<h1>Web Application</h1>
-
 <ul>
-  <li0><a href="#allYouCancCook">All You Can Cook</a></li>
+  <li><a href="#allYouCancCook">All You Can Cook</a></li>
   <li><a href="#busRouteService">Bus Route Service</a></li>
 </ul>
 
